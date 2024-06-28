@@ -6,5 +6,3 @@ export const Hello = (request: VercelRequest, response: VercelResponse) => {
   const randomMessage = getRandomMessage()
   response.status(200).send(`Hello ${name}!, ${randomMessage}`)
 }
-
-export default Hello
