@@ -13,8 +13,9 @@ bot.on('message', greeting())
 // bot.on('sticker', (ctx) => ctx.reply('👍'))
 
 export const handleBot = async (req: VercelRequest, res: VercelResponse) => {
-  const getWebhookInfo = await bot.telegram.getWebhookInfo()
+  //   const getWebhookInfo = await bot.telegram.getWebhookInfo()
   if (req.method === 'POST') {
+    console.log(JSON.stringify(req.body))
     await bot.handleUpdate(req.body as unknown as Update, res)
   } else {
     res.status(200).json('Listening to bot events...')

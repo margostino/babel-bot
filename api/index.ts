@@ -1,15 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { handleBot } from '../src/handler/index'
 
-// export const HandleGateway = async (request: VercelRequest, response: VercelResponse) => {
-//   bot.start((ctx) => ctx.reply('Welcome!'))
-//   bot.help((ctx) => ctx.reply('Send me a sticker'))
-//   bot.on('sticker', (ctx) => ctx.reply('👍'))
-//   bot.hears('hi', (ctx) => ctx.reply('Hey there!'))
-//   bot.launch()
-//   response.status(200).send('Bot is running!')
-// }
-
 export default async function handle(req: VercelRequest, res: VercelResponse) {
   try {
     await handleBot(req, res)

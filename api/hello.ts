@@ -1,8 +1,8 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { getRandomMessage } from '../src/utils/randomMessages'
 
-export const Hello = (request: VercelRequest, response: VercelResponse) => {
-  const { name = 'World' } = request.query
+export default async function handle(req: VercelRequest, res: VercelResponse) {
+  const { name = 'World' } = req.query
   const randomMessage = getRandomMessage()
-  response.status(200).send(`Hello ${name}!, ${randomMessage}`)
+  res.status(200).send(`Hello ${name}!, ${randomMessage}`)
 }
