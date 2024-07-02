@@ -5,6 +5,7 @@ const handleBot = async (req: VercelRequest, res: VercelResponse) => {
   try {
     console.log(JSON.stringify(req.body))
     if (!shouldHandleRequest(req)) {
+      console.log('Unauthorized')
       res.status(401).json({
         error: 'Unauthorized',
       })
