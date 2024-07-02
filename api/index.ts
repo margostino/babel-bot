@@ -1,6 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { shouldHandleRequest } from 'auth'
-import { handleRequest } from '../src'
+import { handleRequest, shouldHandleRequest } from '../src'
 
 const handleBot = async (req: VercelRequest, res: VercelResponse) => {
   try {
