@@ -8,6 +8,7 @@ const config = {
     'prettier',
     'prettier/react',
     'prettier/standard',
+    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
 
     // Uses eslint-config-prettier to disable ESLint rules from
@@ -27,7 +28,7 @@ const config = {
       jsx: true, // Allows for the parsing of JSX
     },
   },
-  plugins: ['react', 'prettier', 'standard', 'jest', 'security', 'import-casing', 'import', 'node'],
+  plugins: ['react', 'prettier', 'standard', 'jest', 'security', 'import', 'node'],
   overrides: [
     {
       files: ['**/*.js'],

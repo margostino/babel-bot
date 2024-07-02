@@ -1,8 +1,16 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
+import { shouldHandleRequest } from 'auth'
 import { handleRequest } from '../src'
 
 const handleBot = async (req: VercelRequest, res: VercelResponse) => {
   try {
+    console.log(JSON.stringify(req))
+    if (!shouldHandleRequest(req)) {
+      res.status(401).json({
+        error: 'Unauthorized',
+      })
+      return
+    }
     await handleRequest(req, res)
   } catch (e: any) {
     console.error(e.message)
