@@ -2,7 +2,9 @@ import { VercelRequest, VercelResponse } from '@vercel/node'
 import winston from 'winston'
 import { handleRequest, shouldHandleRequest } from '../src'
 
-const logger = winston.createLogger()
+const logger = winston.createLogger({
+  transports: [new winston.transports.Console()],
+})
 
 const handleBot = async (req: VercelRequest, res: VercelResponse) => {
   try {
