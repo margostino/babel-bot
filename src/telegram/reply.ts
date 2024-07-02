@@ -10,6 +10,7 @@ const reply = () => async (ctx: Context) => {
   // const userName = `${ctx.message?.from.first_name} ${ctx.message?.from.last_name}`
 
   if (messageId) {
+    console.log('messageId:', messageId)
     await ctx.telegram.sendMessage(messageId, 'sarlanga')
   }
 }
