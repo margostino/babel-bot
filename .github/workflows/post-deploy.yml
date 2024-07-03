@@ -1,0 +1,16 @@
+name: Post deploy to Vercel
+
+on:
+  deployment_status:
+    types: [success]
+    
+jobs:
+  post-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Add steps to perform post-deployment tasks
+      - name: Notify post-deployment
+        run: echo "Deployment was successful. Performing post-deployment tasks."
