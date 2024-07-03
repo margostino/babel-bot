@@ -6,10 +6,7 @@ jobs:
     if: ${{ github.event.deployment_status.state == 'success' }}
     name: successful_deploy
     runs-on: ubuntu-latest
-    steps:
-      - name: Install jq
-        run: sudo apt-get install jq
-        
+    steps:        
       - name: send telegram message when deploy is successfully done
         run: |
           curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
@@ -22,9 +19,10 @@ jobs:
           response=$(curl -s -o response.json -w "%{http_code}" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/setWebhook?url=https%3A%2F%2Fbabel-bot.vercel.app%2Fapi%2Findex&allowed_updates=%5B%22message%22%5D&secret_token=${{ secrets.TELEGRAM_BOT_API_SECRET_TOKEN }}")
           http_code=$(tail -n 1 <<< "$response")
           body=$(head -n -1 response.json)
-          ok=$(echo $body | jq -r '.ok')
-          echo $ok
-          echo $http_code
+          ok=$(echo $body | jq -r '.ok')          
+          echo "Response: $body"
+          echo "HTTP Code: $http_code"
+          echo "OK: $ok"
           echo "::set-output name=http_code::$http_code"
           echo "::set-output name=ok::$ok"
           echo "::set-output name=response::$body"
