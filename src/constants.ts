@@ -9,5 +9,5 @@ export const BABEL_API_TOKEN = process.env.BABEL_API_TOKEN || ''
 export const HEADERS = {
   AUTHORIZATION: 'authorization',
   X_BABEL_ADMIN_TOKEN: 'x-babel-admin-token',
-  X_TELEGRAM_BOT_API_SECRET_TOKEN: 'X-Telegram-Bot-Api-Secret-Token',
+  X_TELEGRAM_BOT_API_SECRET_TOKEN: 'x-telegram-bot-api-secret-token',
 }
