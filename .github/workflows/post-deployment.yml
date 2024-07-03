@@ -20,7 +20,7 @@ jobs:
           http_code=$(tail -n 1 <<< "$response")
           body=$(head -n -1 response.json)
           ok=$(echo $body | jq -r '.ok')
-          echo $response
+          echo $body
           echo $http_code
           echo "::set-output name=http_code::$http_code"
           echo "::set-output name=ok::$ok"
