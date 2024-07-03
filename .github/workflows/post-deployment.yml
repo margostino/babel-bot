@@ -1,4 +1,4 @@
-name: Post deploy to Vercel
+name: Post deployment to Vercel
 
 on:
   deployment_status:
