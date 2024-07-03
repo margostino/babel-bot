@@ -1,9 +1,10 @@
 import { Telegraf } from 'telegraf'
 import { message } from 'telegraf/filters'
 import { TELEGRAM_BOT_TOKEN, TELEGRAM_BOT_WEBHOOK_URL } from '../constants'
+import { logger } from '../logger'
 import { reply } from './reply'
 
-const newBot = async () => {
+const newBot = () => {
   if (!TELEGRAM_BOT_TOKEN) {
     throw new Error('BOT_TOKEN must be provided!')
   }
@@ -23,7 +24,7 @@ const newBot = async () => {
         port: 443,
       },
     })
-    .catch((e) => console.error(`bot failed when launching: ${e.message}`))
+    .catch((e) => logger.error(`bot failed when launching: ${e.message}`))
   return bot
 }
 

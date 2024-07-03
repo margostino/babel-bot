@@ -1,4 +1,5 @@
 export { shouldHandleRequest } from './auth'
 export { handleRequest } from './core/handler'
+export { logger } from './logger'
 export { bot } from './telegram/newBot'
 export { getRandomMessage } from './utils'

@@ -4,7 +4,7 @@ import { bot } from '../../telegram'
 
 export const handleRequest = async (req: VercelRequest, res: VercelResponse) => {
   if (req.method === 'POST') {
-    await bot.handleUpdate(req.body as unknown as Update, res)
+    bot.handleUpdate(req.body as unknown as Update, res)
   } else {
     res.status(200).json('listening to bot events...')
   }
