@@ -6,6 +6,8 @@ export const TELEGRAM_BOT_API_SECRET_TOKEN = process.env.TELEGRAM_BOT_API_SECRET
 
 export const BABEL_API_TOKEN = process.env.BABEL_API_TOKEN || ''
 
+export const BABEL_API_HOST = process.env.BABEL_API_HOST || ''
+
 export const HEADERS = {
   AUTHORIZATION: 'authorization',
   X_BABEL_ADMIN_TOKEN: 'x-babel-admin-token',

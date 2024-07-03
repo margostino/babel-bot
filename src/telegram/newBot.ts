@@ -1,6 +1,7 @@
 import { Telegraf } from 'telegraf'
 import { message } from 'telegraf/filters'
 import { TELEGRAM_BOT_TOKEN } from '../constants'
+import { reply } from './reply'
 
 const newBot = () => {
   if (!TELEGRAM_BOT_TOKEN) {
@@ -9,7 +10,8 @@ const newBot = () => {
   const bot = new Telegraf(TELEGRAM_BOT_TOKEN)
   bot.start((ctx) => ctx.reply('Welcome!'))
   bot.on(message('text'), async (ctx) => {
-    await ctx.telegram.sendMessage(ctx.message.chat.id, 'echo')
+    const babelResponse = await reply(ctx.message.text)
+    await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)
   })
   bot.launch().catch((e) => console.error(`bot failed when launching: ${e.message}`))
   return bot

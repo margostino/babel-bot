@@ -3,11 +3,11 @@ import { handleRequest, shouldHandleRequest } from '../src'
 
 const handleBot = async (req: VercelRequest, res: VercelResponse) => {
   try {
-    console.log(JSON.stringify(req.body))
+    console.log(`new request: ${JSON.stringify(req.body)}`)
     if (!shouldHandleRequest(req)) {
-      console.log('Unauthorized')
+      console.log('unauthorized')
       res.status(401).json({
-        error: 'Unauthorized',
+        error: 'unauthorized',
       })
       return
     }
