@@ -14,7 +14,7 @@ jobs:
             -d text="🟢 ${{ github.event.deployment_status.description }}!"
       - name: set webhook for successful deploy
         run: |
-          curl -s -X GET "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/setWebhook?url=https://babel-bot.vercel.app/api/index&allowed_updates=[\"message\"]&secret_token=${{ secrets.TELEGRAM_BOT_API_SECRET_TOKEN }}"
+          curl -s -X GET "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/setWebhook\?url\=https%3A%2F%2Fbabel-bot.vercel.app%2Fapi%2Findex\&allowed_updates\=%5B%22message%22%5D\&secret_token\=${{ secrets.TELEGRAM_BOT_API_SECRET_TOKEN }}"
           echo "::set-output name=response::$response"
       - name: check webhook set and send notification
         run: |
