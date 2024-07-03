@@ -1,6 +1,10 @@
 import { Telegraf } from 'telegraf'
 import { message } from 'telegraf/filters'
-import { TELEGRAM_BOT_TOKEN, TELEGRAM_BOT_WEBHOOK_URL } from '../constants'
+import {
+  TELEGRAM_BOT_API_SECRET_TOKEN,
+  TELEGRAM_BOT_TOKEN,
+  TELEGRAM_BOT_WEBHOOK_URL,
+} from '../constants'
 import { logger } from '../logger'
 import { reply } from './reply'
 
@@ -20,6 +24,7 @@ const newBot = () => {
       allowedUpdates: ['message'],
       webhook: {
         domain: TELEGRAM_BOT_WEBHOOK_URL,
+        secretToken: TELEGRAM_BOT_API_SECRET_TOKEN,
         path: '/api/index',
         port: 443,
       },
