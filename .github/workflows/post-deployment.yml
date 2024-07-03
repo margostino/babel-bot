@@ -7,6 +7,9 @@ jobs:
     name: successful_deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Install jq
+        run: sudo apt-get install jq
+        
       - name: send telegram message when deploy is successfully done
         run: |
           curl -s -X POST https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage \
@@ -20,7 +23,7 @@ jobs:
           http_code=$(tail -n 1 <<< "$response")
           body=$(head -n -1 response.json)
           ok=$(echo $body | jq -r '.ok')
-          echo $body
+          echo $ok
           echo $http_code
           echo "::set-output name=http_code::$http_code"
           echo "::set-output name=ok::$ok"
