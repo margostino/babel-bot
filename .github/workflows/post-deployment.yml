@@ -16,9 +16,9 @@ jobs:
       - name: set webhook for successful deploy
         id: set_webhook
         run: |
-          response=$(curl -s -o response.json -w "%{http_code}" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/setWebhook?url=https%3A%2F%2Fbabel-bot.vercel.app%2Fapi%2Findex&allowed_updates=%5B%22message%22%5D&secret_token=${{ secrets.TELEGRAM_BOT_API_SECRET_TOKEN }}")
+          response=$(curl -s -w "%{http_code}" "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/setWebhook?url=https%3A%2F%2Fbabel-bot.vercel.app%2Fapi%2Findex&allowed_updates=%5B%22message%22%5D&secret_token=${{ secrets.TELEGRAM_BOT_API_SECRET_TOKEN }}")
           http_code=$(tail -n 1 <<< "$response")
-          body=$(head -n -1 response.json)
+          body=$(echo "$response" | head -n -1)          
           ok=$(echo $body | jq -r '.ok')          
           echo "Response: $body"
           echo "HTTP Code: $http_code"
