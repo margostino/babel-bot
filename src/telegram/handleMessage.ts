@@ -1,7 +1,7 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
+import { Update } from 'telegraf/typings/core/types/typegram'
 import { logger } from '../logger'
-import { reply } from './reply'
-import { sendMessage } from './sendMessage'
+import { bot } from './newBot'
 
 type TelegramRequestBody = {
   update_id: number
@@ -26,24 +26,30 @@ type TelegramRequestBody = {
 }
 
 export const handleMessage = async (req: VercelRequest, res: VercelResponse) => {
-  if (req.method === 'POST') {
-    const body = req.body as TelegramRequestBody
-    const chatId = body.message?.chat?.id
-    const userMessage = body.message?.text
+  // if (req.method === 'POST') {
+  //   const body = req.body as TelegramRequestBody
+  //   const chatId = body.message?.chat?.id
+  //   const userMessage = body.message?.text
 
-    if (chatId) {
-      if (userMessage && chatId) {
-        logger.info(`Received message: ${userMessage} from chat ID: ${chatId}`)
-        const response = await reply(userMessage)
-        await sendMessage(chatId, response)
-      } else {
-        logger.info('No message found in the request')
-      }
-      //setWebHook()
-    } else {
-      logger.error('Bad Request: Chat ID not found')
-    }
-    //bot.handleUpdate(req.body as unknown as Update, res)
+  //   if (chatId) {
+  //     if (userMessage && chatId) {
+  //       logger.info(`Received message: ${userMessage} from chat ID: ${chatId}`)
+  //       const response = await reply(userMessage)
+  //       await sendMessage(chatId, response)
+  //     } else {
+  //       logger.info('No message found in the request')
+  //     }
+  //     //setWebHook()
+  //   } else {
+  //     logger.error('Bad Request: Chat ID not found')
+  //   }
+  //   //bot.handleUpdate(req.body as unknown as Update, res)
+  // } else {
+  //   logger.info('not a POST request')
+  // }
+  if (req.method === 'POST') {
+    logger.info('handling message...')
+    await bot.handleUpdate(req.body as unknown as Update, res)
   } else {
     logger.info('not a POST request')
   }

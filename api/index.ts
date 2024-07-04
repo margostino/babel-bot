@@ -14,8 +14,8 @@ const handleBot = async (req: VercelRequest, res: VercelResponse) => {
     logger.info('request authorized, now handling request...')
     await handleRequest(req, res)
   } catch (e: any) {
-    console.error(e.message)
-    res.statusCode = 500
+    logger.error(e.message)
+    res.status(500).json('Internal server error')
   }
 }
 
