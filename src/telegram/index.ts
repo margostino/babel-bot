@@ -1,2 +1,1 @@
-export { bot } from './newBot'
-export { reply } from './reply'
+export { handleMessage } from './handleMessage'
