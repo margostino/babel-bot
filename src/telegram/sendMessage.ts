@@ -11,7 +11,7 @@ export const sendMessage = async (chatId: number, reply: string): Promise<any> =
       logger.info('reply sent successfully set')
       return response.data.message.response
     } else if (response.status === 200) {
-      logger.info(`got unexpected response sending message: ${response.data}`)
+      logger.info(`got unexpected response sending message: ${JSON.stringify(response.data)}`)
       throw new Error(`Error: unexpected response from Telegram ${response.data}`)
     } else {
       logger.info('telegram sendMessage failed')
