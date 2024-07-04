@@ -20,7 +20,6 @@ export const handleRequest = async (req: VercelRequest, res: VercelResponse) => 
           domain: TELEGRAM_BOT_WEBHOOK_URL,
           secretToken: TELEGRAM_BOT_API_SECRET_TOKEN,
           path: '/api/index',
-          port: 443,
         },
       })
       .catch((e) => logger.error(`bot failed when launching: ${e.message}`))
