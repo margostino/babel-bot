@@ -11,6 +11,7 @@ const handleBot = async (req: VercelRequest, res: VercelResponse) => {
       })
       return
     }
+    logger.info('request authorized, now handling request...')
     await handleRequest(req, res)
   } catch (e: any) {
     console.error(e.message)

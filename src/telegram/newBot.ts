@@ -14,9 +14,8 @@ const newBot = () => {
   bot.on(message('text'), async (ctx) => {
     const babelResponse = await reply(ctx.message.text)
     ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing')
-    ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse).then(async () => {
-      await setWebHook()
-    })
+    await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)
+    await setWebHook()
   })
   bot.launch().catch((e) => logger.error(`bot failed when launching: ${e.message}`))
   // bot
