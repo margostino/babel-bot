@@ -27,8 +27,6 @@ type TelegramRequestBody = {
 
 export const handleMessage = async (req: VercelRequest, res: VercelResponse) => {
   if (req.method === 'POST') {
-    res.status(200).json('handling events...')
-
     const body = req.body as TelegramRequestBody
     const chatId = body.message?.chat?.id
     const userMessage = body.message?.text
