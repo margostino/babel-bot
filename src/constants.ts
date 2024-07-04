@@ -19,3 +19,5 @@ export const TELEGRAM_BOT_WEBHOOK_URL = process.env.TELEGRAM_BOT_WEBHOOK_URL || 
 export const VERCEL_ENV = process.env.VERCEL_ENV || ''
 
 export const TELEGRAM_API_HOST = 'https://api.telegram.org'
+
+export const TELEGRAM_CHAT_ID = Number(process.env.TELEGRAM_CHAT_ID) || 0

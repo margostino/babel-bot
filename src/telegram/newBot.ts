@@ -6,7 +6,7 @@ import {
   TELEGRAM_BOT_WEBHOOK_URL,
 } from '../constants'
 import { logger } from '../logger'
-import { reply } from './reply'
+import { getReply } from './getReply'
 
 const newBot = () => {
   if (!TELEGRAM_BOT_TOKEN) {
@@ -15,7 +15,7 @@ const newBot = () => {
   const bot = new Telegraf(TELEGRAM_BOT_TOKEN)
   bot.start((ctx) => ctx.reply('Welcome!'))
   bot.on(message('text'), async (ctx) => {
-    const babelResponse = await reply(ctx.message.text)
+    const babelResponse = await getReply(ctx.message.text)
     ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing')
     await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)
   })
@@ -33,4 +33,4 @@ const newBot = () => {
   return bot
 }
 
-export const bot = newBot()
+export const bot = null //newBot()

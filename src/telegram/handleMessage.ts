@@ -1,7 +1,8 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { Update } from 'telegraf/typings/core/types/typegram'
+import { TELEGRAM_CHAT_ID } from '../constants'
 import { logger } from '../logger'
-import { bot } from './newBot'
+import { getReply } from './getReply'
+import { sendMessage } from './sendMessage'
 
 type TelegramRequestBody = {
   update_id: number
@@ -26,31 +27,37 @@ type TelegramRequestBody = {
 }
 
 export const handleMessage = async (req: VercelRequest, res: VercelResponse) => {
-  // if (req.method === 'POST') {
-  //   const body = req.body as TelegramRequestBody
-  //   const chatId = body.message?.chat?.id
-  //   const userMessage = body.message?.text
+  let response = null
 
-  //   if (chatId) {
-  //     if (userMessage && chatId) {
-  //       logger.info(`Received message: ${userMessage} from chat ID: ${chatId}`)
-  //       const response = await reply(userMessage)
-  //       await sendMessage(chatId, response)
-  //     } else {
-  //       logger.info('No message found in the request')
-  //     }
-  //     //setWebHook()
-  //   } else {
-  //     logger.error('Bad Request: Chat ID not found')
-  //   }
-  //   //bot.handleUpdate(req.body as unknown as Update, res)
+  const body = req.body as TelegramRequestBody
+  let chatId = body.message?.chat?.id
+  const userMessage = body.message?.text
+
+  if (req.method === 'POST') {
+    if (chatId && userMessage) {
+      logger.info(`Received message: ${userMessage} from chat ID: ${chatId}`)
+      response = await getReply(userMessage)
+    } else {
+      response = 'Chat ID or user message not found'
+      logger.error('Bad Request: Chat ID not found')
+    }
+    //bot.handleUpdate(req.body as unknown as Update, res)
+  } else {
+    response = 'Not a POST request'
+    logger.info('not a POST request')
+  }
+
+  if (!chatId) {
+    chatId = TELEGRAM_CHAT_ID
+  }
+
+  await sendMessage(chatId, response)
+  //setWebHook()
+
+  // if (req.method === 'POST') {
+  //   logger.info('handling message...')
+  //   await bot.handleUpdate(req.body as unknown as Update, res)
   // } else {
   //   logger.info('not a POST request')
   // }
-  if (req.method === 'POST') {
-    logger.info('handling message...')
-    await bot.handleUpdate(req.body as unknown as Update, res)
-  } else {
-    logger.info('not a POST request')
-  }
 }
