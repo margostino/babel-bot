@@ -15,7 +15,7 @@ jobs:
     
       - name: babel warm up
         run: |          
-          curl -v -H "Authorization: Bearer ${{ secrets.BABEL_API_TOKEN }}" -s -X GET https://babel-gateway.vercel.app/api/index?query=hej&isEcho=true | jq .
+          curl -H "Authorization: Bearer ${{ secrets.BABEL_API_TOKEN }}" -s -X GET https://babel-gateway.vercel.app/api/index?query=hej&isEcho=true | jq .
 
       # - name: set webhook for successful deploy
       #   id: set_webhook
