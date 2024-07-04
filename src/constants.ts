@@ -21,3 +21,5 @@ export const VERCEL_ENV = process.env.VERCEL_ENV || ''
 export const TELEGRAM_API_HOST = 'https://api.telegram.org'
 
 export const TELEGRAM_CHAT_ID = Number(process.env.TELEGRAM_CHAT_ID) || 0
+
+export const IS_BABEL_ECHO = process.env.IS_BABEL_ECHO || 'true'

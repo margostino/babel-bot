@@ -1,9 +1,9 @@
 import axios from 'axios'
-import { BABEL_API_HOST, BABEL_API_TOKEN } from '../constants'
+import { BABEL_API_HOST, BABEL_API_TOKEN, IS_BABEL_ECHO } from '../constants'
 import { logger } from '../logger'
 
 export const getBabel = async (query: string): Promise<any> => {
-  const apiUrl = `${BABEL_API_HOST}/api/babel?query=${query}`
+  const apiUrl = `${BABEL_API_HOST}/api/index?query=${query}&isEcho=${IS_BABEL_ECHO}`
 
   try {
     const response = await axios.get(apiUrl, {

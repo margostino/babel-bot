@@ -6,6 +6,7 @@ export const handleRequest = async (req: VercelRequest, res: VercelResponse) => 
   if (req.method === 'POST') {
     try {
       await handleMessage(req, res)
+      res.status(200).json({ status: 'sent' })
     } catch (error) {
       logger.error('Error handling message:', error)
       res.status(500).json('Internal server error')

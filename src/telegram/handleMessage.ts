@@ -2,6 +2,7 @@ import { VercelRequest, VercelResponse } from '@vercel/node'
 import { TELEGRAM_CHAT_ID } from '../constants'
 import { logger } from '../logger'
 import { getReply } from './getReply'
+import { sendMessage } from './sendMessage'
 
 type TelegramRequestBody = {
   update_id: number
@@ -50,7 +51,7 @@ export const handleMessage = async (req: VercelRequest, res: VercelResponse) => 
     chatId = TELEGRAM_CHAT_ID
   }
 
-  //await sendMessage(chatId, response)
+  await sendMessage(chatId, response)
   //setWebHook()
 
   // if (req.method === 'POST') {
