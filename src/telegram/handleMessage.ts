@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { logger } from 'logger'
+import { logger } from '../logger'
 import { reply } from './reply'
 import { sendMessage } from './sendMessage'
 
