@@ -3,6 +3,7 @@ import { message } from 'telegraf/filters'
 import { TELEGRAM_BOT_TOKEN } from '../constants'
 import { logger } from '../logger'
 import { reply } from './reply'
+import { setWebHook } from './setWebhook'
 
 const newBot = () => {
   if (!TELEGRAM_BOT_TOKEN) {
@@ -13,7 +14,9 @@ const newBot = () => {
   bot.on(message('text'), async (ctx) => {
     const babelResponse = await reply(ctx.message.text)
     ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing')
-    await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)
+    ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse).then(async () => {
+      await setWebHook()
+    })
   })
   bot.launch().catch((e) => logger.error(`bot failed when launching: ${e.message}`))
   // bot

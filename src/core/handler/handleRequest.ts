@@ -1,26 +1,9 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { Update } from 'telegraf/typings/core/types/typegram'
-import { bot } from '../../telegram'
 
 export const handleRequest = async (req: VercelRequest, res: VercelResponse) => {
   if (req.method === 'POST') {
-    bot.handleUpdate(req.body as unknown as Update, res)
-    // bot.on(message('text'), async (ctx) => {
-    //   const babelResponse = await reply(ctx.message.text)
-    //   ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing')
-    //   await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)
-    // })
-    // // bot.launch().catch((e) => logger.error(`bot failed when launching: ${e.message}`))
-    // bot
-    //   .launch({
-    //     allowedUpdates: ['message'],
-    //     webhook: {
-    //       domain: TELEGRAM_BOT_WEBHOOK_URL,
-    //       secretToken: TELEGRAM_BOT_API_SECRET_TOKEN,
-    //       path: '/api/index',
-    //     },
-    //   })
-    //   .catch((e) => logger.error(`bot failed when launching: ${e.message}`))
+    res.status(200).json('handling events...')
+    //bot.handleUpdate(req.body as unknown as Update, res)
   } else {
     res.status(200).json('listening to bot events...')
   }

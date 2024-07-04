@@ -17,3 +17,5 @@ export const BABEL_API_HOST = process.env.BABEL_API_HOST || ''
 export const TELEGRAM_BOT_WEBHOOK_URL = process.env.TELEGRAM_BOT_WEBHOOK_URL || ''
 
 export const VERCEL_ENV = process.env.VERCEL_ENV || ''
+
+export const TELEGRAM_API_HOST = 'https://api.telegram.org'
