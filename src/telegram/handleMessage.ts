@@ -1,5 +1,7 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
+import { Update } from 'telegraf/typings/core/types/typegram'
 import { logger } from '../logger'
+import { bot } from './newBot'
 
 type TelegramRequestBody = {
   update_id: number
@@ -47,7 +49,7 @@ export const handleMessage = async (req: VercelRequest, res: VercelResponse) => 
   // }
   if (req.method === 'POST') {
     logger.info('handling message...')
-    //await bot.handleUpdate(req.body as unknown as Update, res)
+    await bot.handleUpdate(req.body as unknown as Update, res)
   } else {
     logger.info('not a POST request')
   }
