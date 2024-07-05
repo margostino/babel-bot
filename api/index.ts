@@ -3,7 +3,7 @@ import { VercelRequest, VercelResponse } from '@vercel/node'
 import { handleRequest, logger, shouldHandleRequest } from '../src'
 
 const handleBot = async (req: VercelRequest, res: VercelResponse) => {
-  console.log(JSON.stringify(req))
+  console.log(JSON.stringify(req.headers))
   try {
     const updateRequest = req.body as unknown as Update
     logger.info(`new request: ${JSON.stringify(req.body)}`)
