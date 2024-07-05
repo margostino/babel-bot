@@ -23,3 +23,7 @@ export const TELEGRAM_API_HOST = 'https://api.telegram.org'
 export const TELEGRAM_CHAT_ID = Number(process.env.TELEGRAM_CHAT_ID) || 0
 
 export const IS_BABEL_ECHO = process.env.IS_BABEL_ECHO || 'true'
+
+export const ALLOWED_TELEGRAM_USERNAMES = process.env.ALLOWED_TELEGRAM_USERNAMES || ''
+
+export const ALLOWED_TELEGRAM_USER_IDS = process.env.ALLOWED_TELEGRAM_USER_IDS || ''

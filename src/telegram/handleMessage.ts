@@ -1,4 +1,4 @@
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import { VercelResponse } from '@vercel/node'
 // import { TELEGRAM_CHAT_ID } from '../constants'
 import { logger } from '../logger'
 // import { getReply } from './getReply'
@@ -6,29 +6,7 @@ import { logger } from '../logger'
 import { Update } from 'telegraf/typings/core/types/typegram'
 import { bot } from './bot'
 
-type TelegramRequestBody = {
-  update_id: number
-  message?: {
-    message_id: number
-    from: {
-      id: number
-      is_bot: boolean
-      first_name: string
-      username: string
-      language_code: string
-    }
-    chat: {
-      id: number
-      first_name: string
-      username: string
-      type: string
-    }
-    date: number
-    text: string
-  }
-}
-
-export const handleMessage = async (req: VercelRequest, res: VercelResponse) => {
+export const handleMessage = async (updateRequest: Update, res: VercelResponse) => {
   // let response = null
 
   // const body = req.body as TelegramRequestBody
@@ -56,10 +34,6 @@ export const handleMessage = async (req: VercelRequest, res: VercelResponse) => 
   // await sendMessage(chatId, response)
   //setWebHook()
 
-  if (req.method === 'POST') {
-    logger.info('handling message...')
-    await bot().handleUpdate(req.body as unknown as Update, res)
-  } else {
-    logger.info('not a POST request')
-  }
+  logger.info('handling message...')
+  await bot().handleUpdate(updateRequest, res)
 }
