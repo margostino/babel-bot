@@ -1,1 +1,2 @@
-export { handleMessage } from './handleMessage'
+export { bot } from './bot'
+export { sendMessage } from './sendMessage'

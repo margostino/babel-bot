@@ -1,5 +1,6 @@
 export { shouldHandleRequest } from './core/auth'
-export { handleRequest } from './core/handler'
+export { handleError, handleRequest } from './core/handler'
 export { logger } from './logger'
+export { type SendMessageResponse, type UpdateRequest } from './schemas/telegram'
 export { bot } from './telegram/bot'
 export { getRandomMessage } from './utils'

@@ -22,20 +22,5 @@ export const bot = () => {
       ctx.reply('An error occurred. Please try again later.')
     }
   })
-
-  // This below is not working as expected:
-
-  // await bot
-  //   .launch({
-  //     allowedUpdates: ['message'],
-  //     webhook: {
-  //       domain: TELEGRAM_BOT_WEBHOOK_URL,
-  //       secretToken: TELEGRAM_BOT_API_SECRET_TOKEN,
-  //       path: '/api/index',
-  //     },
-  //   })
-  //   .then(() => logger.info('bot launched successfully'))
-  //   .catch((e) => logger.error(`bot failed when launching: ${e.message}`))
-
   return bot
 }

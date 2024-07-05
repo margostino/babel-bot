@@ -1,13 +1,13 @@
-import { Update } from '@telegraf/types'
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { handleRequest, logger, shouldHandleRequest } from '../src'
+import { Update } from 'telegraf/typings/core/types/typegram'
+import { handleError, handleRequest, logger, shouldHandleRequest } from '../src'
 
 const handleBot = async (req: VercelRequest, res: VercelResponse) => {
-  console.log(req.headers)
+  let updateRequest: Update.MessageUpdate | null = null
   try {
-    const updateRequest = req.body as unknown as Update
+    updateRequest = req.body as unknown as Update.MessageUpdate
     logger.info(`new request: ${JSON.stringify(req.body)}`)
-    if (!shouldHandleRequest(req)) {
+    if (!shouldHandleRequest(updateRequest, req)) {
       logger.info('unauthorized')
       res.status(401).json({
         error: 'unauthorized',
@@ -16,8 +16,10 @@ const handleBot = async (req: VercelRequest, res: VercelResponse) => {
     }
     logger.info('request authorized, now handling request...')
     await handleRequest(updateRequest, res)
-  } catch (e: any) {
-    logger.error(e.message)
+  } catch (error) {
+    const err = error as Error
+    logger.error(err.message)
+    await handleError(updateRequest, err)
     res.status(500).json('Internal server error')
   }
 }

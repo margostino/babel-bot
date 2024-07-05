@@ -1,5 +1,7 @@
 // TODO: validate
 
+import { splitVariable } from './utils'
+
 export const HEADERS = {
   AUTHORIZATION: 'authorization',
   X_BABEL_ADMIN_TOKEN: 'x-babel-admin-token',
@@ -24,6 +26,10 @@ export const TELEGRAM_CHAT_ID = Number(process.env.TELEGRAM_CHAT_ID) || 0
 
 export const IS_BABEL_ECHO = process.env.IS_BABEL_ECHO || 'true'
 
-export const ALLOWED_TELEGRAM_USERNAMES = process.env.ALLOWED_TELEGRAM_USERNAMES || ''
+export const ALLOWED_TELEGRAM_USERNAMES = splitVariable(process.env.ALLOWED_TELEGRAM_USERNAMES)
 
-export const ALLOWED_TELEGRAM_USER_IDS = process.env.ALLOWED_TELEGRAM_USER_IDS || ''
+export const ALLOWED_TELEGRAM_USER_IDS = splitVariable(process.env.ALLOWED_TELEGRAM_USER_IDS)
+
+export const MINIMAL_HEADERS = splitVariable(process.env.MINIMAL_HEADERS)
+
+export const REQUIRED_HEADERS = splitVariable(process.env.REQUIRED_HEADERS)

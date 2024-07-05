@@ -1,9 +1,12 @@
 import { VercelRequest } from '@vercel/node'
-import { isAllowedUserId } from './isAllowedUserId'
+import { Update } from 'telegraf/typings/core/types/typegram'
+import { isAllowedUser } from './isAllowedUser'
 import { isAuthorized } from './isAuthorized'
 import { isValidRequest } from './isValidRequest'
 
-export const shouldHandleRequest = (request: VercelRequest) => {
-  const body = request.body as TelegramRequestBody
-  return isAllowedUserId(request) && isAuthorized(request) && isValidRequest(request)
+export const shouldHandleRequest = (
+  updateRequest: Update.MessageUpdate,
+  request: VercelRequest
+) => {
+  return isAllowedUser(updateRequest) && isAuthorized(request) && isValidRequest(request)
 }
