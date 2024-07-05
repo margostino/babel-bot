@@ -23,15 +23,18 @@ type TelegramResponse = {
   }
 }
 
-export const sendMessage = async (chatId: number, reply: string): Promise<any> => {
-  const apiUrl = `${TELEGRAM_API_HOST}/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${chatId}&text=${reply}`
+export const sendChatAction = async (chatId: number, reply: string): Promise<any> => {
+  const apiUrl = `${TELEGRAM_API_HOST}/bot${TELEGRAM_BOT_TOKEN}/sendChatAction`
   try {
-    const response = await axios.get(apiUrl)
+    const response = await axios.post(apiUrl, {
+      chat_id: chatId,
+      action: reply,
+    })
 
     if (response.status === 200 && response.data) {
       const telegramResponse = response.data as TelegramResponse
       if (telegramResponse.ok) {
-        logger.info('reply sent successfully set')
+        logger.info('action reply sent successfully set')
         return
       }
     }
@@ -41,7 +44,9 @@ export const sendMessage = async (chatId: number, reply: string): Promise<any> =
       throw new Error(`Error: unexpected response from Telegram ${response.data}`)
     } else {
       logger.info('telegram sendMessage failed')
-      throw new Error(`Error: received status code from Telegram (sendMessage): ${response.status}`)
+      throw new Error(
+        `Error: received status code from Telegram (sendChatAction): ${response.status}`
+      )
     }
   } catch (error) {
     logger.info('unexpected failure sending message to Telegram')

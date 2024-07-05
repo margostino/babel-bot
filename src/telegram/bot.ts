@@ -1,8 +1,9 @@
 import { Telegraf } from 'telegraf'
 import { message } from 'telegraf/filters'
+import { getBabel } from '../babel'
 import { TELEGRAM_BOT_TOKEN } from '../constants'
 import { logger } from '../logger'
-import { getReply } from './getReply'
+import { sendChatAction } from './sendChatAction'
 
 export const bot = () => {
   if (!TELEGRAM_BOT_TOKEN) {
@@ -12,8 +13,8 @@ export const bot = () => {
   bot.start((ctx) => ctx.reply('Welcome!'))
   bot.on(message('text'), async (ctx) => {
     try {
-      ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing')
-      const babelResponse = await getReply(ctx.message.text)
+      sendChatAction(ctx.message.chat.id, 'typing')
+      const babelResponse = await getBabel(ctx.message.text)
       await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)
     } catch (error) {
       logger.error(`Failed to handle message: ${(error as Error).message}`)
