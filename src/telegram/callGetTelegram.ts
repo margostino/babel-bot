@@ -2,7 +2,7 @@ import axios from 'axios'
 import { SendMessageResponse } from 'schemas/telegram'
 import { logger } from '../logger'
 
-export const callTelegram = async (apiUrl: string): Promise<any> => {
+export const callGetTelegram = async (apiUrl: string): Promise<any> => {
   try {
     const response = await axios.get(apiUrl)
 
