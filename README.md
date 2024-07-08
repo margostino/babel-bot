@@ -4,6 +4,10 @@
 
 A friendly Telegram bot interface for retrieving, querying, exploring and navigating through Babel data using natural language.
 
+<p align="center">
+  <img src="https://github.com/margostino/babel-foundation/blob/master/assets/babel-architecture.png?raw=true" alt="Babel Foundation Architecture"/>
+</p>
+
 ## Features
 
 - **Natural Language Processing**: Interact with Babel data through natural language queries.
