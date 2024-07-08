@@ -1,6 +1,6 @@
 # 🤖 Babel Bot
 
-(This project is under Babel Foundation project. You can read the manifest [here](https://github.com/margostino/babel-foundation))
+(This project is under Babel Foundation initiative. You can read the manifest [here](https://github.com/margostino/babel-foundation))
 
 A friendly Telegram bot interface for retrieving, querying, exploring and navigating through Babel data using natural language.
 
