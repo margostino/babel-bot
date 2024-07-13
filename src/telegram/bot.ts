@@ -9,11 +9,12 @@ export const bot = () => {
   if (!TELEGRAM_BOT_TOKEN) {
     throw new Error('BOT_TOKEN must be provided!')
   }
-  const bot = new Telegraf(TELEGRAM_BOT_TOKEN)
+  const bot = new Telegraf(TELEGRAM_BOT_TOKEN)  s
   bot.start((ctx) => ctx.reply('Welcome!'))
   bot.command('parking', (ctx) => ctx.reply('Share you quick note and I will store in parking for you!'))
   bot.on(message('text'), async (ctx) => {
-    try {      
+    try {
+      console.log(ctx.message)
       //ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing') ==> this does not work as expected
       sendChatAction(ctx.message.chat.id, 'typing')
       const babelResponse = await getBabel(ctx.message.text)      
