@@ -11,6 +11,7 @@ export const bot = () => {
   }
   const bot = new Telegraf(TELEGRAM_BOT_TOKEN)
   bot.start((ctx) => ctx.reply('Welcome!'))
+  bot.command('parking', (ctx) => ctx.reply('Share you quick note and I will store in parking for you!'))
   bot.on(message('text'), async (ctx) => {
     try {
       //ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing') ==> this does not work as expected
