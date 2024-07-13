@@ -14,10 +14,11 @@ export const bot = () => {
   bot.command('parking', (ctx) => ctx.reply('Share you quick note and I will store in parking for you!'))
   bot.on(message('text'), async (ctx) => {
     try {
+      console.log(JSON.stringify(ctx))
       //ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing') ==> this does not work as expected
       sendChatAction(ctx.message.chat.id, 'typing')
-      const babelResponse = await getBabel(ctx.message.text)
-      await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)
+      const babelResponse = await getBabel(ctx.message.text)      
+      await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)      
     } catch (error) {
       logger.error(`Failed to handle message: ${(error as Error).message}`)
       ctx.reply('An error occurred. Please try again later.')
