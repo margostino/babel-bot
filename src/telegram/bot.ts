@@ -13,8 +13,7 @@ export const bot = () => {
   bot.start((ctx) => ctx.reply('Welcome!'))
   bot.command('parking', (ctx) => ctx.reply('Share you quick note and I will store in parking for you!'))
   bot.on(message('text'), async (ctx) => {
-    try {
-      console.log(JSON.stringify(ctx))
+    try {      
       //ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing') ==> this does not work as expected
       sendChatAction(ctx.message.chat.id, 'typing')
       const babelResponse = await getBabel(ctx.message.text)      
