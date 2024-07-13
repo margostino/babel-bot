@@ -9,7 +9,7 @@ export const bot = () => {
   if (!TELEGRAM_BOT_TOKEN) {
     throw new Error('BOT_TOKEN must be provided!')
   }
-  const bot = new Telegraf(TELEGRAM_BOT_TOKEN)  s
+  const bot = new Telegraf(TELEGRAM_BOT_TOKEN)
   bot.start((ctx) => ctx.reply('Welcome!'))
   bot.command('parking', (ctx) => ctx.reply('Share you quick note and I will store in parking for you!'))
   bot.on(message('text'), async (ctx) => {
