@@ -1,5 +1,5 @@
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { getRandomMessage } from 'utils'
+import { getRandomMessage } from '../src'
 
 export default async function handle(req: VercelRequest, res: VercelResponse) {
   const { name = 'World' } = req.query
