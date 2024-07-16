@@ -20,7 +20,7 @@ export const appendMessage = async (message: string) => {
     //     values: [[new Date().toISOString(), message]],
     //   },
     // })
-    await sheet.spreadsheets.values.update({
+    await sheet.spreadsheets.values.append({
       spreadsheetId: GOOGLE_SHEET_ID,
       range: GOOGLE_SHEET_RANGE,
       valueInputOption: 'RAW',
