@@ -29,8 +29,12 @@ export const bot = () => {
         messages && messages.length > 2 ? JSON.parse(messages[messages.length - 3][1]) : null
       if (penultimateMessage && penultimateMessage['content'] === '/parking') {
         const reply = '✅ Message added in Parking!'
-        await saveMessage(ctx.message.text)
-        await appendMessage(JSON.stringify({ sender: 'assistant', content: reply }))
+        Promise.all([
+          saveMessage(ctx.message.text),
+          appendMessage(JSON.stringify({ sender: 'assistant', content: reply })),
+        ])
+        // await saveMessage(ctx.message.text)
+        // await appendMessage(JSON.stringify({ sender: 'assistant', content: reply }))
         return ctx.reply('✅ Message added in Parking!')
       }
       const babelResponse = await getCompletion(ctx.message.text)
