@@ -33,3 +33,12 @@ export const ALLOWED_TELEGRAM_USER_IDS = splitVariable(process.env.ALLOWED_TELEG
 export const MINIMAL_HEADERS = splitVariable(process.env.MINIMAL_HEADERS)
 
 export const REQUIRED_HEADERS = splitVariable(process.env.REQUIRED_HEADERS)
+
+export const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || ''
+
+export const GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY =
+  process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY || ''
+
+export const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID || ''
+
+export const GOOGLE_SHEET_RANGE = process.env.GOOGLE_SHEET_RANGE || ''

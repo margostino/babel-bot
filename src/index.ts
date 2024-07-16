@@ -1,5 +1,7 @@
 export { shouldHandleRequest } from './core/auth'
 export { handleError, handleRequest } from './core/handler'
+export { appendMessage } from './google/appendMessage'
+export { getMessages } from './google/getMessages'
 export { logger } from './logger'
 export { type SendMessageResponse, type UpdateRequest } from './schemas/telegram'
 export { bot } from './telegram/bot'

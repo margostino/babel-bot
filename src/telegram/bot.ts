@@ -1,7 +1,9 @@
 import { Telegraf } from 'telegraf'
 import { message } from 'telegraf/filters'
-import { getBabel } from '../babel'
+import { getCompletion, saveMessage } from '../babel'
 import { TELEGRAM_BOT_TOKEN } from '../constants'
+import { appendMessage } from '../google/appendMessage'
+import { getMessages } from '../google/getMessages'
 import { logger } from '../logger'
 import { sendChatAction } from './sendChatAction'
 
@@ -11,13 +13,28 @@ export const bot = () => {
   }
   const bot = new Telegraf(TELEGRAM_BOT_TOKEN)
   bot.start((ctx) => ctx.reply('Welcome!'))
-  bot.command('parking', (ctx) => ctx.reply('Share you quick note and I will store in parking for you!'))
+  bot.command('parking', async (ctx) => {
+    const reply = 'Share you quick note and I will store in parking for you!'
+    await appendMessage(JSON.stringify({ sender: 'user', content: '/parking' }))
+    await appendMessage(JSON.stringify({ sender: 'assistant', content: reply }))
+    ctx.reply(reply)
+  })
   bot.on(message('text'), async (ctx) => {
     try {
       //ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing') ==> this does not work as expected
       sendChatAction(ctx.message.chat.id, 'typing')
-      const babelResponse = await getBabel(ctx.message.text)      
-      await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)      
+      await appendMessage(JSON.stringify({ sender: 'user', content: ctx.message.text }))
+      const messages = await getMessages()
+      const penultimateMessage = messages ? JSON.parse(messages[messages.length - 3][1]) : null
+      if (penultimateMessage && penultimateMessage['content'] === '/parking') {
+        const reply = '✅ Message added in Parking!'
+        await saveMessage(ctx.message.text)
+        await appendMessage(JSON.stringify({ sender: 'assistant', content: reply }))
+        return ctx.reply('✅ Message added in Parking!')
+      }
+      const babelResponse = await getCompletion(ctx.message.text)
+      await appendMessage(JSON.stringify({ sender: 'assistant', content: babelResponse }))
+      await ctx.telegram.sendMessage(ctx.message.chat.id, babelResponse)
     } catch (error) {
       logger.error(`Failed to handle message: ${(error as Error).message}`)
       ctx.reply('An error occurred. Please try again later.')
