@@ -25,7 +25,8 @@ export const bot = () => {
       sendChatAction(ctx.message.chat.id, 'typing')
       await appendMessage(JSON.stringify({ sender: 'user', content: ctx.message.text }))
       const messages = await getMessages()
-      const penultimateMessage = messages ? JSON.parse(messages[messages.length - 3][1]) : null
+      const penultimateMessage =
+        messages && messages.length > 2 ? JSON.parse(messages[messages.length - 3][1]) : null
       if (penultimateMessage && penultimateMessage['content'] === '/parking') {
         const reply = '✅ Message added in Parking!'
         await saveMessage(ctx.message.text)
