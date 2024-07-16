@@ -42,3 +42,6 @@ export const GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY =
 export const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID || ''
 
 export const GOOGLE_SHEET_RANGE = process.env.GOOGLE_SHEET_RANGE || ''
+
+export const GOOGLE_SERVICE_ACCOUNT_CREDENTIALS =
+  process.env.GOOGLE_SERVICE_ACCOUNT_CREDENTIALS || ''

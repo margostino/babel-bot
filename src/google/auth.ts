@@ -1,7 +1,9 @@
 import { JWT } from 'google-auth-library'
 import { google } from 'googleapis'
+import { GOOGLE_SERVICE_ACCOUNT_CREDENTIALS } from '../constants'
+import { decodeBase64Value } from '../utils'
 
-const credentials = require('/Users/martin.dagostino/Downloads/babel-429321-0ac65578e200.json')
+const credentials = decodeBase64Value(GOOGLE_SERVICE_ACCOUNT_CREDENTIALS)
 
 export async function authorize() {
   const auth = new google.auth.GoogleAuth({
