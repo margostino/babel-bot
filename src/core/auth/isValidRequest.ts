@@ -1,5 +1,6 @@
 import { VercelRequest } from '@vercel/node'
 import { IncomingHttpHeaders } from 'http'
+import { logger } from 'logger'
 import { MINIMAL_HEADERS, REQUIRED_HEADERS } from '../../constants'
 
 const validateHeaders = (headers: IncomingHttpHeaders) => {
@@ -16,8 +17,10 @@ const validateHeaders = (headers: IncomingHttpHeaders) => {
     ([key, value]) => headers[key] === value
   )
 
-  console.log('minimalHeadersValid', minimalHeadersValid)
-  console.log('requiredHeadersValid', requiredHeadersValid)
+  logger.log('minimalHeadersValid', minimalHeadersValid)
+  logger.log('requiredHeadersValid', requiredHeadersValid)
+  logger.log('headers', JSON.stringify(headers))
+
   return minimalHeadersValid && requiredHeadersValid
 }
 
