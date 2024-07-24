@@ -19,7 +19,7 @@ const validateHeaders = (headers: IncomingHttpHeaders) => {
   
   logger.info(`headers: ${JSON.stringify(headers)}`)
 
-  return minimalHeadersValid && requiredHeadersValid
+  return minimalHeadersValid// && requiredHeadersValid
 }
 
 export const isValidRequest = (req: VercelRequest) => {
