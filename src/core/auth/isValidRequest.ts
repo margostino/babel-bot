@@ -1,7 +1,7 @@
 import { VercelRequest } from '@vercel/node'
 import { IncomingHttpHeaders } from 'http'
-import { logger } from 'logger'
 import { MINIMAL_HEADERS, REQUIRED_HEADERS } from '../../constants'
+import { logger } from '../../logger'
 
 const validateHeaders = (headers: IncomingHttpHeaders) => {
   const requiredHeadersMap: Record<string, string> = {}
