@@ -16,10 +16,8 @@ const validateHeaders = (headers: IncomingHttpHeaders) => {
   const requiredHeadersValid = Object.entries(requiredHeadersMap).every(
     ([key, value]) => headers[key] === value
   )
-
-  logger.log('minimalHeadersValid', minimalHeadersValid)
-  logger.log('requiredHeadersValid', requiredHeadersValid)
-  logger.log('headers', JSON.stringify(headers))
+  
+  logger.info(`headers: ${JSON.stringify(headers)}`)
 
   return minimalHeadersValid && requiredHeadersValid
 }
