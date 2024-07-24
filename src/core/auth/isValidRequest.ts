@@ -16,6 +16,8 @@ const validateHeaders = (headers: IncomingHttpHeaders) => {
     ([key, value]) => headers[key] === value
   )
 
+  console.log('minimalHeadersValid', minimalHeadersValid)
+  console.log('requiredHeadersValid', requiredHeadersValid)
   return minimalHeadersValid && requiredHeadersValid
 }
 
