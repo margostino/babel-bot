@@ -2,8 +2,7 @@ import { Telegraf } from 'telegraf'
 import { message } from 'telegraf/filters'
 import { getCompletion, saveMessage } from '../babel'
 import { TELEGRAM_BOT_TOKEN } from '../constants'
-import { appendMessage } from '../google/appendMessage'
-import { getMessages } from '../google/getMessages'
+import { appendMessage, getMessages } from '../google'
 import { logger } from '../logger'
 import { sendChatAction } from './sendChatAction'
 
@@ -12,13 +11,22 @@ export const bot = () => {
     throw new Error('BOT_TOKEN must be provided!')
   }
   const bot = new Telegraf(TELEGRAM_BOT_TOKEN)
+  
   bot.start((ctx) => ctx.reply('Welcome!'))
+  
   bot.command('parking', async (ctx) => {
     const reply = 'Share you quick note and I will store in parking for you!'
     await appendMessage(JSON.stringify({ sender: 'user', content: '/parking' }))
     await appendMessage(JSON.stringify({ sender: 'assistant', content: reply }))
     ctx.reply(reply)
   })
+  bot.command('clean', async (ctx) => {
+    const reply = '🧹 Cache cleaned!'
+    await appendMessage(JSON.stringify({ sender: 'user', content: '/parking' }))
+    await appendMessage(JSON.stringify({ sender: 'assistant', content: reply }))
+    ctx.reply(reply)
+  })
+
   bot.on(message('text'), async (ctx) => {
     try {
       //ctx.telegram.sendChatAction(ctx.message.chat.id, 'typing') ==> this does not work as expected
