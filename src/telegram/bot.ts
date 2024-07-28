@@ -2,7 +2,7 @@ import { Telegraf } from 'telegraf'
 import { message } from 'telegraf/filters'
 import { getCompletion, saveMessage } from '../babel'
 import { TELEGRAM_BOT_TOKEN } from '../constants'
-import { appendMessage, getMessages } from '../google'
+import { appendMessage, cleanAll, getMessages } from '../google'
 import { logger } from '../logger'
 import { sendChatAction } from './sendChatAction'
 
@@ -22,8 +22,7 @@ export const bot = () => {
   })
   bot.command('clean', async (ctx) => {
     const reply = '🧹 Cache cleaned!'
-    await appendMessage(JSON.stringify({ sender: 'user', content: '/parking' }))
-    await appendMessage(JSON.stringify({ sender: 'assistant', content: reply }))
+    await cleanAll()
     ctx.reply(reply)
   })
 
